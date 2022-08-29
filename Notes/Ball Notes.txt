@@ -4,3 +4,35 @@ put into MayaSequence folder
 change the _ to a . to work in maya
 save template
 change to mayaiff
+
+file names
+
+put into one drive!
+
+maya
+after effects
+mayaSequence
+
+Camera selected
+attribute editor
+camera shape node
+image plane
+hit create
+select first image - open
+use sequence
+
+camera settings 1920 1080
+
+render settings
+next to hypershade
+width 1080
+height 1920
+resolution 72
+animation settings
+animation
+framerate
+time slider
+29.97
+
+
+

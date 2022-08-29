@@ -1,0 +1,6 @@
+output module
+render que high quality iff sequence
+put into MayaSequence folder
+change the _ to a . to work in maya
+save template
+change to mayaiff

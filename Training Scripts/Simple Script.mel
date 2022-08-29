@@ -1,0 +1,5 @@
+polySphere -r 3 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+
+polySphere -radius 5 -subdivisionsX 5 -ax 0 1 0 -cuv 2 -ch 1;
+// integers required for some dont use 5.13655 for subdivisionsX and so on
+

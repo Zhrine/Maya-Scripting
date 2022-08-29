@@ -1,0 +1,134 @@
+//Building a snowman in script
+/*comments
+in
+mutiple
+lines
+*/
+//create base sphere
+polySphere -radius 3 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 3 0 ;
+
+//move comand works because new object is created
+//create middle sphere
+polySphere -radius 2 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 6 0 ;
+
+//move comand works because new object is created
+//create top sphere
+polySphere -radius 1.2 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 8.5 0 ;
+
+print (`polySphere -q -subdivisionsY`);
+
+polySphere -r .25 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 0;
+move -r 0.959673 8.834933 -1.105296 ;
+move -r 0 0 2.065575 ;
+move -r -0.438665 0 0 ;
+polySphere -r .25 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 0;
+move -r 0.959673 8.834933 -1.105296 ;
+move -r 0 0 2.065575 ;
+move -r -0.438665 0 0 ;
+move -r -0.951955 0 0 ;
+move -r -0.0825366 0 0 ;
+polyCone -r 1 -h 2 -sx 20 -sy 1 -sz 0 -ax 0 1 0 -rcp 0 -cuv 3 -ch 0;
+// Result: pCone2 // 
+move -r 0 8.791848 0 ;
+rotate -r -ws -fo 90 0 0 ;
+move -r 0 0 1.878349 ;
+scale -r 0.572763 0.572763 0.572763 ;
+scale -r 1 1.938127 1 ;
+scale -r 0.608367 0.608367 0.608367 ;
+move -r 0 0 -0.336073 ;
+displaySmoothness -divisionsU 3 -divisionsV 3 -pointsWire 16 -pointsShaded 4 -polygonObject 3;
+
+//copy test
+polyCylinder -r 0.25 -h 6 -sx 8 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 0;
+// Result: pCylinder1 // 
+move -r 0 7.620275 0 ;
+move -r -2.383244 0 0 ;
+rotate -r -ws -fo 0 0 55.13306 ;
+move -r 0 -0.451663 0 ;
+scale -r 1 0.618815 1 ;
+polyCylinder -r 0.15 -h 3 -sx 8 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 0;
+// Result: pCylinder2 // 
+move -r 0 7.781517 0 ;
+move -r -3.581497 0 0 ;
+scale -r 1 0.31969 1 ;
+move -r 0 0.766201 0 ;
+rotate -r -ws -fo 0 0 -19.467442 ;
+move -r 0.138844 0 0 ;
+select -cl  ;
+polyCylinder -r 0.15 -h 1 -sx 8 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 0;
+// Result: pCylinder3 // 
+move -r 0 7.71427 0 ;
+move -r -3.861869 0 0 ;
+move -r 0 0.970213 0 ;
+rotate -r -ws -fo 0 0 21.596489 ;
+move -r -0.173977 0 0 ;
+scale -r 1 0.833017 1 ;
+move -r 0.000242201 0 0 ;
+rotate -r -ws -fo 0 0 11.3946 ;
+move -r 0 9.16113e-05 0 ;
+polyCylinder -r 0.15 -h 1 -sx 8 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 0;
+// Result: pCylinder4 // 
+move -r 0 6.93053 0 ;
+move -r -4.254917 0 0 ;
+move -r 0 1.223839 0 ;
+rotate -r -ws -fo 0 0 83.615251 ;
+scale -r 1 0.810963 1 ;
+select -cl  ;
+
+polyCylinder -r 0.15 -h 1 -sx 8 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 0;
+// Result: pCylinder5 // 
+move -r 0 7.341753 0 ;
+move -r 2.257278 0 0 ;
+rotate -r -ws -fo 0 0 67.264436 ;
+scale -r 1 2.928114 1 ;
+move -r 0 -1.172202 0 ;
+rotate -r -ws -fo 0 0 -12.199934 ;
+move -r 0.272019 0 0 ;
+move -r 0 -0.360182 0 ;
+polyCylinder -r 0.15 -h 1 -sx 8 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 0;
+// Result: pCylinder6 // 
+move -r 0 4.827312 0 ;
+move -r 3.278192 0 0 ;
+polyCylinder -r 0.15 -h 1 -sx 8 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 0;
+// Result: pCylinder7 // 
+move -r 0 4.688744 0 ;
+move -r 3.588561 0 0 ;
+rotate -r -ws -fo 0 0 23.915756 ;
+move -r 0.0496774 0 0 ;
+move -r 0 0.000783009 0 ;
+polyCylinder -r 0.15 -h 1 -sx 8 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 0;
+// Result: pCylinder8 // 
+move -r 0 4.898759 0 ;
+move -r 4.259999 0 0 ;
+rotate -r -ws -fo 0 0 71.575993 ;
+move -r -0.316205 0 0 ;
+move -r 0 0.183593 0 ;
+move -r -0.135746 0 0 ;
+
+polyCylinder -r 1 -h 1 -sx 20 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 0;
+// Result: pCylinder9 // 
+move -r 0 9.522532 0 ;
+scale -r 1 0.214819 1 ;
+move -r 0 -0.239216 0 ;
+polyCylinder -r 1 -h 1 -sx 20 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 0;
+// Result: pCylinder10 // 
+move -r 0 10.144464 0 ;
+scale -r 0.919371 0.919371 0.919371 ;
+scale -r 0.882559 0.882559 0.882559 ;
+move -r 0 -0.426803 0 ;
+select -r pCylinder10.f[55] ;
+select -add pCylinder10.f[0:59] ;
+select -cl  ;
+select -r pCylinder10.f[54] ;
+select -tgl pCylinder10.f[43] ;
+select -add pCylinder10.f[0:59] ;
+select -cl  ;
+select -r pCylinder10.f[54] ;
+select -r pCylinder10.f[0:19] pCylinder10.f[40:59] ;
+select -d pCylinder10.f[0:24] ;
+move -r 0 1.214515 0 ;
+rotate -r -p -9.67264e-08cm 11.337876cm -1.4509e-07cm -ws -fo 0 0 4.720096 ;
+move -r 0.0868799 -0.602116 0.23158 ;

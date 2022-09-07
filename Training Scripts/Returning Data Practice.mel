@@ -1,0 +1,12 @@
+//create polysphere
+string $object[];
+$object = `polySphere -r 1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1`;
+// array [pSphere3, polysphere3]
+// only need index 0 in the array
+
+move -relative 2.732999 3.5065 -5.362875 $object[0];
+
+float $radius = `polySphere -q -radius $object[0]`;
+print ($radius);
+
+polySphere -e -radius ($radius - 2.3) $object[0];

@@ -1,0 +1,20 @@
+float $size = 3;
+
+//lumpyness of the snowman
+float $lump = 25;
+
+float $rand = rand(0, 7);
+
+float $randLocation = rand(-10, 20);
+
+polySphere -r $size -sx ($lump / $rand) -sy ($lump / $rand) -ax 0 1 0 -cuv 2 -ch 1;
+rename "Bottom";
+move -r $randLocation ($size -($randLocation)) $randLocation;
+
+polySphere -r ($size - 1) -sx ($lump / $rand) -sy ($lump / $rand) -ax 0 $lump 0 -cuv 2 -ch 1;
+rename "Middle";
+move -r $randLocation (($size * 2) + ($size - 1)-($randLocation)) $randLocation;
+
+polySphere -r ($size - 2) -sx ($lump / $rand) -sy ($lump / $rand) -ax 0 1 0 -cuv 2 -ch 1;
+rename "Top";
+move -r $randLocation (($size * 2) + (($size - 1) * 2) + ($size -2)-($randLocation)) $randLocation;

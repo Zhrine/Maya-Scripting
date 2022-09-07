@@ -1,0 +1,56 @@
+// Use $ to make a variable and has to start with a letter
+
+// using an int puts it in temporary space in ram.
+
+int $number;
+$number = 27;
+print ($number);
+
+string $name;
+$name = "Foster";
+print($name);
+$name = "John";
+print($name);
+
+
+float $price = 29.99;
+print ($price);
+
+//boolean
+int $grade = 1;
+
+
+
+//array
+float $position[] = {-8.1, -1.8, -9.4, 378};
+//                     0     1     2    3   they are always in order 0 is number1
+print($position[3]);
+
+$position[0] = 5.9;
+$position[1] = -.3;
+$position[2] = -5.7;
+$position[4] = 100.7;
+print ($position);
+
+
+
+/*
+    int (integer): 1, 15 2059379084, -3524, 0
+    -You can have any value as long as its a full number
+
+    float (float/decimal): 3.14, 4.0, 473.509, -32.0
+    -Floats values work with decimals, use for accuracy
+
+    string (text): "car", "picnic", "hello world", "365"
+    -strings have to be in Quotation marks works with numbers as well if in "quotes"
+
+    bool (boolean - True/False): 1 or 0
+    -booleans are true or false statements 1=true 0=false in mel
+    -booleans arent in mel you use ints for the coding its in python.
+    
+    array(container of muliple values): [1,254,24],["john", "Foster"]
+    multiple values of these types. [square brackets matter the most]
+    
+
+
+*/

@@ -1,0 +1,28 @@
+proc NumberCounterThing(int $min, int $max)
+{
+    // $i is our default number and cannot be called outside of this block
+    for ($i = $min; $i <= $max; $i++)
+    {
+        //% is modulus and lets us define even and odd
+        if ($i % 2 == 0)
+        {
+            //the "\n" is a string command to add it to the next line
+            print ("Even: " + $i + "\n");
+        }
+        else
+        {    
+            print ("Odd: " + $i + "\n");
+        }
+    }
+
+}
+//call the proc in maya
+NumberCounterThing (10, 30);
+
+//extra code for storing objects selected in a variable
+{//curly brackets keep it in its own code block, so its editable
+string $objects[];
+$objects = 'ls -sl';
+print ($objects);
+}//if it leaves curly brackets once the code is added the $variable cannot be changed
+//if you want to use the $objects variable you must use code outside of brackets and define that $variable

@@ -1,0 +1,51 @@
+//Creating A Spiral Staircase
+
+//polycube in the dimensions i enjoy
+proc SpiralStaircase(int $staircaseMin, int $staicaseMax)
+{
+    //create polystep and move it in place
+    polyCube -w 5 -h 0.3 -d 1 -sx 2 -sy 2 -sz 2 -ax 0 1 0 -cuv 4 -ch 1;
+    rename "Step";
+    move -r -2.5 0 0 "Step".scalePivot "Step".rotatePivot ;
+    select -cl  ;
+    select -tgl Step.e[16] Step.e[19];
+    move -r 2.4 0 0 ;
+    select -cl  ;
+    select -r Step ;
+    move -r 5 0 0 ;
+    //repeat action
+    for ($i = $staircaseMin; $i <= $staicaseMax; $i++)
+    {
+        //above the world point
+        if ($i >= 1)
+        {
+            duplicate -rr;
+            move -r 0 0.300 0 ;
+            rotate -r -os -fo 0 15 0 ;
+        }
+        //go below world point
+        else
+        {
+            duplicate -rr;
+            move -r 0 -0.300 0 ;
+            rotate -r -os -fo 0 -15 0 ;
+        }
+    }
+}
+
+SpiralStaircase(1, 25);
+
+/*polycube in the dimensions i enjoy
+polyCube -w 5 -h 0.3 -d 1 -sx 2 -sy 2 -sz 2 -ax 0 1 0 -cuv 4 -ch 1;
+rename "Step";
+move -r -2.5 0 0 "Step".scalePivot "Step".rotatePivot ;
+select -cl  ;
+select -tgl Step.e[16] Step.e[19];
+move -r 2.4 0 0 ;
+select -cl  ;
+select -r Step ;
+move -r 2.5 0 0 ;
+duplicate -rr;
+move -r 0 0.300 0 ;
+rotate -r -os -fo 0 15 0 ;
+*/

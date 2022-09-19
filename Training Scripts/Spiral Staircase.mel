@@ -1,39 +1,72 @@
 //Creating A Spiral Staircase
 
 //polycube in the dimensions i enjoy
-proc SpiralStaircase(int $staircaseMin, int $staicaseMax)
+proc SpiralStaircaseH(int $staircaseMin, int $staicaseMax, int $stairWidth, float $stairHeight) 
 {
+    string $name = ("Step");
+    float $stairDistance = ($stairHeight + $stairHeight/8) ;
+
+    if (`objExists $name` == 0)
+    {
     //create polystep and move it in place
-    polyCube -w 5 -h 0.3 -d 1 -sx 2 -sy 2 -sz 2 -ax 0 1 0 -cuv 4 -ch 1;
-    rename "Step";
-    move -r -2.5 0 0 "Step".scalePivot "Step".rotatePivot ;
+    polyCube -w $stairWidth -h ($stairHeight) -d 1 -sx 2 -sy 2 -sz 2 -ax 0 1 0 -cuv 4 -ch 1;
+    rename $name;
+    move -r ($stairWidth / 2) 0 0 $name.scalePivot $name.rotatePivot ;
+    move -rpr -x 0 ;
     select -cl  ;
-    select -tgl Step.e[16] Step.e[19];
-    move -r 2.4 0 0 ;
+    select -tgl Step.e[30] Step.e[33];
+    move -r (-$stairWidth / 2.5) 0 0 ;
     select -cl  ;
     select -r Step ;
-    move -r 5 0 0 ;
     //repeat action
     for ($i = $staircaseMin; $i <= $staicaseMax; $i++)
     {
+        
         //above the world point
         if ($i >= 1)
         {
+            
             duplicate -rr;
-            move -r 0 0.300 0 ;
+            move -r 0 ($stairDistance) 0 ;
+            rotate -r -os -fo 0 15 0 ;
+        }
+        //go below world point
+        else
+        {
+            
+            duplicate -rr;
+            move -r 0 (-$stairDistance) 0 ;
+            rotate -r -os -fo 0 -15 0 ;
+        }
+    }
+    }
+    else if (`objExists $name` >= 1)
+    {
+    
+    for ($i = $staircaseMin; $i <= $staicaseMax; $i++)
+    {
+        
+        //above the world point
+        if ($i >= 1)
+        {
+            
+            duplicate -rr;
+            move -r 0 ($stairDistance) 0 ;
             rotate -r -os -fo 0 15 0 ;
         }
         //go below world point
         else
         {
             duplicate -rr;
-            move -r 0 -0.300 0 ;
+            move -r 0 (-$stairDistance) 0 ;
             rotate -r -os -fo 0 -15 0 ;
         }
     }
+    }
 }
+SpiralStaircaseH(-10, 25, 6, 0.3);
+//              amount width height
 
-SpiralStaircase(1, 25);
 
 /*polycube in the dimensions i enjoy
 polyCube -w 5 -h 0.3 -d 1 -sx 2 -sy 2 -sz 2 -ax 0 1 0 -cuv 4 -ch 1;

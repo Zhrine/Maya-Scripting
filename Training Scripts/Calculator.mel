@@ -1,0 +1,96 @@
+
+global proc calculator(int $inputOne, string $operation, int $inputTwo) 
+{
+$i = $inputOne;
+$f = $inputTwo;
+    if($operation == "+")
+    { 
+     float $r = $i + $f;
+        {
+        print "\n";
+        print ($i + "  Plus  " +$f+"\n" + "  Equals  " + $r);
+        }
+    }
+    else if ($operation == "-")
+    {  
+     float $r = $i - $f;
+        {
+        print "\n";
+        print ($i + "  Minus  " +$f+"\n" + "  Equals  " + $r);
+        }
+    }
+    else if ($operation == "*")
+    { 
+     float $r = $i * $f;
+        {
+        print "\n";
+        print ($i + "  Times  " +$f+"\n" + "  Equals  " + $r);
+        }
+    }
+    else if ($operation == "/")
+    { 
+     float $r = $i / $f;
+        {
+        print "\n";
+        print ($i + "  Divided By  " +$f+"\n" + "  Equals  " + $r);
+        }
+    }
+    else if ($operation == "^")
+    { 
+     float $r = pow ($i, $f);
+        {
+        print "\n";
+        print ($i + "  To the Power of  " +$f+"\n" + "  Equals  " + $r);
+        }
+    }
+    else if ($operation == "Me")
+    { 
+     float $r = (($i + $f) / 2);
+        {
+        print "\n";
+        print ($i + "  Average Whole Number Between  " +$f+"\n" + "  Equals  " + $r);
+        }
+    }
+    else
+    {
+        print "Not a valid Character\n";
+    }
+}
+
+
+calculator(10, "+", 30);
+
+
+
+
+/*reference notes and backgorund garble
+// This is a local procedure
+// that is only visible to the code in this file.
+proc red5() {print("red5 standing by...\n");}
+// This is a global procedure. When this file
+// is sourced, this procedure will become
+// available.
+global proc GoGo() {print("GoGo online\n");}
+// This procedure has the same name as this file
+// (without .mel on the end).
+global proc sayWhat() {print("sayWhat online\n");}
+
+calculator(0);
+
+$variables
+int $addition
+int $subtraction 
+int $multiplication 
+int $division 
+int $power 
+int $mean
+int $median
+
+
+global proc string sayHI()
+{
+    return "hello!\n";
+}
+
+*/
+

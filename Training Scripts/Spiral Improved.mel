@@ -1,0 +1,18 @@
+global string $lastObj;
+
+float $posHeight = 0;
+float $rotation = 0;
+
+for ($i=0; $i<10; $i++)
+{
+    string $obj[];
+    $obj = `polyCube`;
+    $lastObj = $obj[0];
+    $lastObj= `rename $lastObj ("Stair_" + ($i + 1))`;
+    
+    xform -r -os -translation 1 $posHeight 1 $lastObj;
+    xform -r -os -rotation 1 $rotation 1 $lastObj;
+
+    $posHeight += 1;
+    $rotation += 20;
+}

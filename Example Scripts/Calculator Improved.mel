@@ -1,0 +1,62 @@
+global proc float Calculator(float $input[], int $operation)
+{  
+    float $result;
+    string $operSymbol;
+
+
+    //perform addition
+    if ($operation ==1)
+    {
+        $result = Addition($input);
+        $operSymbol = "+";
+    }
+    else if ($operation == 2)
+    {
+        $result = Addition($input);
+        $opersymbol = "-";
+    }
+    
+    string $sentence;
+    $sentence += floatArrayToString($input, $operSymbol);
+    $sentence += " = " + $result;
+    return $result;
+}
+global proc float Addition(float $numbers[])
+{
+    float $sum = $numbers[0];
+
+    /* back ticks work same here in mel
+    for($index=0; $index<`size $numbers`; $index++)*/
+    for($index=0; $index<size($numbers); $index++)
+    {
+        // calls every index number in array
+        $sum += $numbers [$index];
+
+    }
+    return $sum;
+
+    //pretty print result
+
+}
+
+global proc float Subtraction(float $numbers[])
+{
+    float $difference = $numbers[0];
+
+    /* back ticks work same here in mel
+    for($index=0; $index<`size $numbers`; $index++)*/
+    for($index=1; $index<size($numbers); $index++)
+    {
+        // calls every index number in array
+        $difference -= $numbers [$index];
+
+    }
+    return $difference;
+
+}
+
+Calculator({3, 5, 6}, 0);
+
+Addition({8, 13, 6});
+/*you can use your addition proc in this way as well
+print (Addition({Addition({2,8}), Addition({4, 6})}));*/

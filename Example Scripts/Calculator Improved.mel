@@ -4,23 +4,63 @@ global proc float Calculator(float $input[], int $operation)
     string $operSymbol;
 
 
-    //perform addition
-    if ($operation ==1)
+    //perform Addition
+    if ($operation ==0)
     {
+        print "Addition\n";
         $result = Addition($input);
         $operSymbol = "+";
     }
-    else if ($operation == 2)
+    //perform Subtraction
+    else if ($operation == 1)
     {
-        $result = Addition($input);
+        print "Subtraction\n";
+        $result = Subtraction($input);
         $opersymbol = "-";
     }
-    
+    //perform Multiplication
+     else if ($operation == 2)
+    {
+        print "Multiplication\n";
+        $result = Multiplication($input);
+        $opersymbol = "*";
+    }
+    //perform Division
+      else if ($operation == 3)
+    {
+        print "Division\n";
+        $result = Division($input);
+        $opersymbol = "/";
+    }
+    //peform Power
+    else if ($operation == 4)
+    {
+        print ("Power of\n");
+        $result = Division($input);
+        $opersymbol = "^";
+    }
+    //perform Mean
+    else if ($operation == 5)
+    {
+        print ("Mean of\n");
+        $result = Mean($input);
+        $opersymbol = "Me";
+    }
+    //perform Median
+    else if ($operation == 6)
+    {
+        print ("Median of\n");
+        $result = Median($input);
+        $opersymbol = "Me";
+    }
     string $sentence;
     $sentence += floatArrayToString($input, $operSymbol);
     $sentence += " = " + $result;
+    //pretty print result
     return $result;
+    //return will always end code
 }
+
 global proc float Addition(float $numbers[])
 {
     float $sum = $numbers[0];
@@ -35,28 +75,85 @@ global proc float Addition(float $numbers[])
     }
     return $sum;
 
-    //pretty print result
-
 }
 
 global proc float Subtraction(float $numbers[])
 {
     float $difference = $numbers[0];
 
-    /* back ticks work same here in mel
-    for($index=0; $index<`size $numbers`; $index++)*/
     for($index=1; $index<size($numbers); $index++)
     {
-        // calls every index number in array
         $difference -= $numbers [$index];
 
     }
     return $difference;
 
 }
+global proc float Multiplication(float $numbers[])
+{
+    float $sum = $numbers[0];
+
+    for($index=1; $index<size($numbers); $index++)
+    {
+        $sum *= $numbers [$index];
+
+    }
+    return $sum;
+
+}
+
+global proc float Division(float $numbers[])
+{
+    float $sum = $numbers[0];
+
+    for($index=1; $index<size($numbers); $index++)
+    {
+        $sum /= $numbers [$index];
+
+    }
+    return $sum;
+
+}
+global proc float Power(float $numbers[])
+{
+    float $sum = $numbers[0];
+
+    for($index=1; $index<size($numbers); $index++)
+    {
+        $sum = pow($numbers [$index]);
+
+    }
+    return $sum;
+
+}
+global proc float Mean(float $numbers[])
+{
+    float $sum = $numbers[0];
+    float $resolution = 0;
+    for($index=1; $index<size($numbers); $index++)
+    {
+        $sum += $numbers [$index];
+        $resolution = $sum / (size($numbers));
+    }
+    return $resolution;
+
+}
+global proc float Median(float $numbers[])
+{
+    float $sum = $numbers[0];
+    for($index=1; $index<size($numbers); $index++)
+    {
+        $sum %= $numbers [$index];
+    }
+    return $sum;
+
+}
+Mean({1, 25});
 
 Calculator({3, 5, 6}, 0);
 
+Calculator({15,25, 18}, 5);
+
 Addition({8, 13, 6});
-/*you can use your addition proc in this way as well
+/*you can use your procs in this way as well
 print (Addition({Addition({2,8}), Addition({4, 6})}));*/

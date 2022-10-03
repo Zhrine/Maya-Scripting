@@ -36,7 +36,7 @@ global proc float Calculator(float $input[], int $operation)
     else if ($operation == 4)
     {
         print ("Power of\n");
-        $result = Division($input);
+        $result = Power($input);
         $opersymbol = "^";
     }
     //perform Mean

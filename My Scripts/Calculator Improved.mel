@@ -140,17 +140,51 @@ global proc float Mean(float $numbers[])
 }
 global proc float Median(float $numbers[])
 {
+    $numbers = `sort $numbers`;
     float $sum = $numbers[0];
     for($index=1; $index<size($numbers); $index++)
     {
-        $sum %= $numbers [$index];
+        
+        if ($sum % 2)
+        {
+            $sum /= ($numbers [$index] / 2);
+        }
+        else
+        {
+            $sum /= ($numbers [$index] / 1);
+        }
+         
+        
     }
     return $sum;
 
 }
+/*
+global proc float Mode(float $numbers[])
+{
+    float $sum = $numbers[0];
+    for($index=1; $index<size($numbers); $index++)
+    {
+        doesnt have to work RN
+        if (expression)
+        {
+            statement;
+        }
+        if ($sum < size($numbers))
+        {
+            $sum = $numbers [$index];
+        }
+        
+    }
+    return $sum;
+}
+*/
+
 Mean({1, 25});
 
 Calculator({3, 5, 6}, 0);
+
+Calculator({3, 5, 6, 25, 16, 32}, 6);
 
 Calculator({15,25, 18}, 5);
 

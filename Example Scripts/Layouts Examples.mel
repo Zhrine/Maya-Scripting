@@ -1,0 +1,189 @@
+//windows will be invizible by default
+window;
+//layouts or windows automatically set heiarchy
+    columnLayout;
+//controls do not automatically set as parents, all are children here
+        button;
+        button;
+        intField;
+        //specifying flag and layout for the next child objects
+        rowLayout -numberOfColumns 3;
+            button;
+            columnLayout;
+                button;
+                button;
+                button;
+            //sets anything after to previous parent
+                setParent ..;
+ // | does top row and you can also "use specifics" if they have been assigned
+                button;
+            //new button will appear in column "rowLayout" after column layout
+
+//need to use show window command to actually show window
+showWindow;
+//if not specified it will grab the most recently created window
+
+
+2
+
+//proc must already be defined to use as a button
+global proc Funne()
+{
+    float $sum = 34.5 + 34.5;
+    print ("The good number is " + $sum +"\n");
+}
+
+
+
+//-exists -ex returns wether the specified obj exists or not, good for clean-up
+//height will be in pixels
+string $nWindow = `window -height 300 
+                          -title "Sick Window"
+                          -sizeable 1
+                          -width 400
+                          "my_toools_ui"`;//defining a name for future
+                          //if you already define it you cant remake current
+                          // 1=true
+string $nColumn = `columnLayout -adjustableColumn 1
+                                -parent $nWindow`;
+
+button -p $nColumn -label "Say Hello!" -command "print (\n\"Hello world!\")";
+                                 // the \ allows quotations inside string
+button -p $nColumn -label "Funne Number" -command Funne;
+
+showWindow $nWindow;
+//code is currently in the "underworld" and needs to be cleaned out
+
+
+//Cleaned up version of code above
+
+
+global proc Funne()
+{
+    float $sum = 34.5 + 34.5;
+    print ("The good number is " + $sum +"\n");
+}
+//set reference early
+//because its referenced in this way you can change the name
+string $nWindow = "my_tools_ui";
+
+//back tics needed because we need the return value
+if (`window -exists $nWindow`)
+        deleteUI $nWindow;
+
+//we use this to clear out other instances of this window so we can open a new one
+
+string $nWindow = `window -height 300 
+                          -title "Sick Window"
+                          -sizeable 1
+                          -width 400
+                          $nWindow`;
+                          //place variable here instead
+string $nColumn = `columnLayout -adjustableColumn 1
+                                -parent $nWindow`;
+
+button -p $nColumn -label "Say Hello!" -command "print (\n\"Hello world!\")";
+button -p $nColumn -label "Funne Number" -command Funne;
+
+showWindow $nWindow;
+
+
+
+
+
+//more cleanup and adding a floatField
+
+
+global proc Funne()
+{
+    float $sum = 34.5 + 34.5;
+    print ("The good number is " + $sum +"\n");
+}
+string $nWindow = "my_tools_ui";
+if (`window -exists $nWindow`)
+        deleteUI $nWindow;
+
+
+
+string $nWindow = `window -height 300 
+                          -title "Sick Window"
+                          -sizeable 1
+                          -width 400
+                          $nWindow`;
+string $nColumn = `columnLayout -adjustableColumn 1
+                                -parent $nWindow`;
+
+button -p $nColumn -label "Say Hello!" -command "print (\n\"Hello world!\")";
+button -p $nColumn -label "Funne Number" -command Funne;
+
+showWindow $nWindow;
+
+
+
+
+//Cleaned up version 2 of code - option variables
+
+/*option variables help future proof coding to continue working in maya
+so they can basically override previous uses of variables using new code*/
+
+global proc Add()
+{
+    string $field1 = `optionVar -q "firstField"`;
+    string $field2 = `optionVar -q "secondField"`;
+    string $field3 = `optionVar -q "thirdField"`;
+    string $field4 = `optionVar -q "myTextField"`;
+
+    float $value1 = `floatField -q -value $field1`;
+    float $value2 = `floatField -q -value $field2`;
+
+
+    float $sum = $value1 + $value2;
+
+    floatField -e -value $sum $field3;
+    textField -e -text ("the sum of " + $value1 + " and " + $value2 + " is " + $sum + ".")$field4;
+    //dont forget to add a target variable, in this case using $field3 and $field4 at the end
+}
+
+
+global proc WhatsInFloatField()
+{
+    string $field1 = `optionVar -q "firstField"`;
+    print ($field1 + "\n");
+
+    print (`floatField -q -value $field1`);
+    
+}
+
+string $nWindow = "my_tools_ui";
+
+if (`window -exists $nWindow`)
+        deleteUI $nWindow;
+
+
+string $nWindow = `window -height 300 
+                          -title "Sick Window"
+                          -sizeable 1
+                          -width 400
+                          $nWindow`;
+string $nColumn = `columnLayout -adjustableColumn 1
+                                -parent $nWindow`;
+
+button -p $nColumn -label "Say Hello!" -command "print (\n\"Hello world!\")";
+
+// you can also do optionVar -stringvalue "--" `floatfield`;
+string $firstFloatField = `floatField`;
+string $secondFloatField = `floatField`;
+//made the third field un-editable by user
+string $thirdFloatField = `floatField -editable 0`;
+string $firstTextField = `textField -editable 0`;
+//option var implementation
+optionVar -stringValue "firstField" $firstFloatField;
+optionVar -stringValue "secondField" $secondFloatField;
+optionVar -stringValue "thirdField" $thirdFloatField;
+optionVar -stringValue "myTextField" $firstTextField;
+
+
+
+button -p $nColumn -label "Print Field Value" -command WhatsInFloatField;
+button -p $nColumn -label "Add Number" -command Add;
+showWindow $nWindow;

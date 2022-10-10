@@ -2,8 +2,7 @@ global proc float Calculator(float $input[], int $operation)
 {  
     float $result;
     string $operSymbol;
-
-
+   
     //perform Addition
     if ($operation ==0)
     {
@@ -36,7 +35,7 @@ global proc float Calculator(float $input[], int $operation)
     else if ($operation == 4)
     {
         print ("Power of\n");
-        $result = Power($input);
+        $result = Division($input);
         $opersymbol = "^";
     }
     //perform Mean
@@ -56,7 +55,16 @@ global proc float Calculator(float $input[], int $operation)
     string $sentence;
     $sentence += floatArrayToString($input, $operSymbol);
     $sentence += " = " + $result;
-    //pretty print result
+    
+    //UI Outputs
+    
+    string $field3 = `optionVar -q "thirdField"`;
+    string $field4 = `optionVar -q "myTextField"`;
+    
+    floatField -e -value $result $field3;
+    textField -e -text ("Result = " + $result)$field4;
+  
+
     return $result;
     //return will always end code
 }
@@ -158,6 +166,72 @@ global proc float Median(float $numbers[])
     return $sum;
 
 }
+
+//UI
+
+global proc Calc_ButtonCmd()
+{
+    float $arrayInput = `optionVar -q "arrayInput"`;
+    string $operations = `optionVar -q "operations"`;
+    
+    
+    float $input = `floatField -q -value $arrayInput`;
+    string $opInput = `radioButtonGrp -q -select $operations`;
+    
+}
+
+
+
+global proc CalculatorUI()
+{
+string $mWindow = "Calculator_UI";
+
+if (`window -exists $mWindow`)
+        deleteUI $mWindow;
+
+$mWindow = `window -height 600 
+                    -title "Calculator"
+                    -sizeable 1
+                    -resizeToFitChildren 1
+                    -width 800
+                    $mWindow`;
+string $mColumn = `columnLayout -adjustableColumn 1
+                                -parent $mWindow`;                            
+optionVar -stringValue "arrayInput" `floatFieldGrp -numberOfFields 3
+    -label "Input" -extraLabel ""
+    -value1 0.0 -value2 0.0 -value3 0.0
+    -p $mColumn`;
+
+
+
+string $group1 = `radioButtonGrp -numberOfRadioButtons 3
+    -label " Operation's " -labelArray3 "+" "-" "*"`;
+string $group2 = `radioButtonGrp -numberOfRadioButtons 4 -shareCollection $group1
+    -label "" -labelArray4 "/" "^" "Mean" "Median"`;
+    optionVar -stringValue "operations"  $group2;
+
+button -label "Enter" -command Calc_ButtonCmd;
+
+button -label "Clear" -command Clear;
+
+string $thirdFloatField = `floatField -editable 0`;
+string $firstTextField = `textField -editable 0`;
+optionVar -stringValue "thirdField" $thirdFloatField;
+optionVar -stringValue "myTextField" $firstTextField;
+
+
+
+showWindow $mWindow;
+}
+global proc Clear()
+{
+    CalculatorUI();
+}
+CalculatorUI();
+
+
+
+
 /*
 global proc float Mode(float $numbers[])
 {
@@ -177,16 +251,16 @@ global proc float Mode(float $numbers[])
     }
     return $sum;
 }
-*/
 
+Calculator($input,$opInput);
 Mean({1, 25});
 
-Calculator({3, 5, 6}, 0);
+
 
 Calculator({3, 5, 6, 25, 16, 32}, 6);
 
 Calculator({15,25, 18}, 5);
 
 Addition({8, 13, 6});
-/*you can use your procs in this way as well
+you can use your procs in this way as well
 print (Addition({Addition({2,8}), Addition({4, 6})}));*/

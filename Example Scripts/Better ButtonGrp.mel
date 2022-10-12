@@ -1,0 +1,61 @@
+global proc Calc_ButtonCmd()
+{
+    string $operations = `optionVar -q "myCollection"`;
+    string $oBttn = `radioCollection -q -select $operations`;
+    print (`radioButton -q -label $oBttn`);
+    
+    
+    //float $arrayInput = `optionVar -q "arrayInput"`;
+    //float $input = `floatField -q -value $arrayInput`;
+    
+}
+
+
+global proc CalculatorUI()
+{
+string $mWindow = "Calculator_UI";
+
+if (`window -exists $mWindow`)
+        deleteUI $mWindow;
+
+$mWindow = `window -widthHeight 600 800
+                    -title "Calculator"
+                    -sizeable 1
+                    -resizeToFitChildren 1
+                    $mWindow`;
+string $mColumn = `columnLayout -adjustableColumn 1
+                                -parent $mWindow`;                            
+optionVar -stringValue "arrayInput" `floatField 
+    -p $mColumn`;
+
+string $collection =`radioCollection -parent $mColumn`;
+optionVar -stringValue "myCollection" $collection;
+radioButton -parent $mColumn -collection $collection -data 0 -label "Addition";
+radioButton -parent $mColumn -collection $collection -data 1 -label "Subtract";
+radioButton -parent $mColumn -collection $collection -data 2 -label "Multiply";
+radioButton -parent $mColumn -collection $collection -data 3 -label "Divide";
+radioButton -parent $mColumn -collection $collection -data 4 -label "Power";
+radioButton -parent $mColumn -collection $collection -data 5 -label "Mean";
+radioButton -parent $mColumn -collection $collection -data 6 -label "Median";
+
+/*
+string $group1 = `radioButtonGrp -numberOfRadioButtons 3
+    -label " Operation's " -labelArray3 "+" "-" "*"`;
+string $group2 = `radioButtonGrp -numberOfRadioButtons 4 -shareCollection $group1
+    -label "" -labelArray4 "/" "^" "Mean" "Median"`;
+    optionVar -stringValue "operations"  $group2;
+
+button -label "Enter" -command Calc_ButtonCmd;
+
+button -label "Clear" -command Clear;
+
+string $thirdFloatField = `floatField -editable 0`;
+string $firstTextField = `textField -editable 0`;
+optionVar -stringValue "thirdField" $thirdFloatField;
+optionVar -stringValue "myTextField" $firstTextField;
+*/
+
+
+showWindow $mWindow;
+}
+CalculatorUI();

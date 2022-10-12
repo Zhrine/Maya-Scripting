@@ -171,13 +171,14 @@ global proc float Median(float $numbers[])
 
 global proc Calc_ButtonCmd()
 {
-    float $arrayInput = `optionVar -q "arrayInput"`;
+    string $arrayInput = `optionVar -q "arrayInput"`;
     string $operations = `optionVar -q "operations"`;
     
     
     float $input = `floatField -q -value $arrayInput`;
     string $opInput = `radioButtonGrp -q -select $operations`;
     
+    print($input);
 }
 
 
@@ -197,9 +198,7 @@ $mWindow = `window -height 600
                     $mWindow`;
 string $mColumn = `columnLayout -adjustableColumn 1
                                 -parent $mWindow`;                            
-optionVar -stringValue "arrayInput" `floatFieldGrp -numberOfFields 3
-    -label "Input" -extraLabel ""
-    -value1 0.0 -value2 0.0 -value3 0.0
+optionVar -stringValue "arrayInput" `floatField 
     -p $mColumn`;
 
 

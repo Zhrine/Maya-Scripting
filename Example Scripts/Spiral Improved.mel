@@ -16,3 +16,26 @@ for ($i=0; $i<10; $i++)
     $posHeight += 1;
     $rotation += 20;
 }
+
+
+
+//Random procs used from a friendly Mod on simplyMaya really helped me get the procceses don way faster so i could focus on buttons
+/* Define a global procedure called randomTY which takes nothing as input
+global proc randomTY()
+{
+	// Define a string array variable $list[] and store a list of selected transform nodes in it
+	string $list[] = `ls -tr -sl`;
+	// Define an integer variable $size and store the size of the $list[] array in it.
+	// Also we define another integer variable $i for later use.
+	int $size = size($list), $i;
+
+	// If there is something in the $list[] then go on. Otherwise just quit
+	if ($size > 0)
+		// Iterate though the list ($i goes from 0 to $size - 1)
+		for($i = 0; $i < $size; $i++)
+			// Set the .translateY (aka .ty) attribute of each object in the list to a random value of 1-9
+			// Note the extra parenthesis'. They are needed so the clauses inside gets executed first before the setAttr command.
+			setAttr ($list[$i] + ".ty") (rand(1,9));
+	// End of story
+}*/
+

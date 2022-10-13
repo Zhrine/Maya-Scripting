@@ -1,3 +1,4 @@
+
 global proc RandomGeneratorUI()
 {
 string $mWindow = "Generator_UI";
@@ -91,22 +92,21 @@ global proc buttonCmd()
         randomX($varOne, $varTwo, $dupe);
         randomY($varOne, $varTwo, $dupe);
     }
-   
-
     
 }
 
 global proc randomX(float $min, float $max, float $duplication)
 {
-    for ($i=0; $i<$duplication; $i++)
+    for ($index=0; $index<$duplication; $index++)
     {
-    duplicate -rr;
+    
 	string $list[] = `ls -tr -sl`;
 	int $size = size($list), $i;
 
 	if ($size > 0)
     {
-		for($i = 0; $i < $size; $i++)
+		for($i = 0; $i < $duplication; $i++)
+            duplicate -rr;
 			setAttr ($list[$i] + ".tx") (rand($min,$max));
     }
     }
@@ -114,34 +114,40 @@ global proc randomX(float $min, float $max, float $duplication)
 
 global proc randomY(float $min, float $max, float $duplication)
 {
-    for ($i=0; $i<$duplication; $i++)
+   
+  for ($index=0; $index<$duplication; $index++)
     {
-    duplicate -rr;
+    
 	string $list[] = `ls -tr -sl`;
 	int $size = size($list), $i;
 
 	if ($size > 0)
     {
-		for($i = 0; $i < $size; $i++)
+		for($i = 0; $i < $duplication; $i++)
+            duplicate -rr;
 			setAttr ($list[$i] + ".ty") (rand($min,$max));
     }
     }
+    
 }
 
 global proc randomZ(float $min, float $max, float $duplication)
 {
-    for ($i=0; $i<$duplication; $i++)
+
+  for ($index=0; $index<$duplication; $index++)
     {
-    duplicate -rr;
+    
 	string $list[] = `ls -tr -sl`;
 	int $size = size($list), $i;
 
 	if ($size > 0)
     {
-		for($i = 0; $i < $size; $i++)
+		for($i = 0; $i < $duplication; $i++)
+            duplicate -rr;
 			setAttr ($list[$i] + ".tz") (rand($min,$max));
     }
-    }
+    }  
+
 }
 
 
@@ -149,6 +155,7 @@ global proc randomZ(float $min, float $max, float $duplication)
 global proc RandomGeneratorUI2()
 {
 string $mWindow = "Generator_UI2";
+
 if (`window -exists $mWindow`)
         deleteUI $mWindow;
 
@@ -200,6 +207,9 @@ button -l "Copy Window" -p $zRow -command RandomGeneratorUI;
 
 showWindow $mWindow;
 }
+
+
+
 global proc buttoncmd2()
 {
     string $operations = `optionVar -q "myCollection"`;
@@ -235,8 +245,6 @@ global proc buttoncmd2()
         randomYY($varOne, $varTwo, $dupe);
     }
    
-
-    
 }
 
 global proc randomXX(float $min, float $max, float $duplication)
@@ -283,6 +291,15 @@ global proc randomZZ(float $min, float $max, float $duplication)
     }
     }
 }
+
+global proc genStartUpReset()
+{
+    if (`window -exists "Generator_UI2"`)
+    {
+        deleteUI "Generator_UI2";
+    }
+
+}genStartUpReset();
 
 //Random procs used from a friendly Mod on simplyMaya really helped me get the procceses don way faster so i could focus on buttons
 /* Define a global procedure called randomTY which takes nothing as input

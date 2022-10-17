@@ -238,13 +238,13 @@ optionVar -stringValue "thirdField" $thirdFloatField;
 optionVar -stringValue "myTextField" $firstTextField; 
  
 button  -label "Enter" -p $mColumn -command Calc_ButtonCmd;
-button -lsUI
-
-string $clear;
 
 
 
-button -label "Clear"-p $mColumn  -command Clear;
+
+
+
+button -label "Clear" -p $mColumn  -command Clear;
 
 
 
@@ -265,6 +265,7 @@ global proc Clear()
     if (`window -exists "Calculator_UI"`)
     {
         CalculatorUI();;
+        
     }
     
 }

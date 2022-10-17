@@ -1,0 +1,322 @@
+
+global proc RandomGeneratorUI()
+{
+string $mWindow = "Generator_UI";
+
+if (`window -exists $mWindow`)
+        deleteUI $mWindow;
+
+$mWindow = `window  -h 350 
+                    -w 350
+                    -title "Copy Generator"
+                    -sizeable 1
+                    -resizeToFitChildren 1
+                    $mWindow`;
+string $mRow = `rowColumnLayout  -numberOfRows 4
+                                -parent $mWindow`; 
+
+string $mColumn = `rowColumnLayout    -numberOfRows 1 
+                          -parent $mRow`;
+string $sColumn = `rowColumnLayout    -numberOfRows 1
+                          -parent $mRow`;
+string $sRow = `rowColumnLayout    -numberOfRows 1 -cs 1 3
+                          -parent $mWindow`;
+string $buttonNumber[];
+
+string $var1 = `floatField -p $mColumn -w 85`;
+button -l "Min Range" -backgroundColor 0.8 0.8 0.8 -w 85
+-parent $sColumn;
+string $var2 = `floatField -p $mColumn -w 85`;
+button -l "Max Range" -backgroundColor 0.8 0.8 0.8 -w 85
+-parent $sColumn; 
+string $dupeAmount = `floatField -p $mColumn -w 85`;
+button -l "Duplicate's" -backgroundColor 0.8 0.8 0.8 -w 85
+-parent $sColumn;
+
+optionVar -stringValue "var1" $var1;
+optionVar -stringValue "var2" $var2;
+optionVar -stringValue "Dupe" $dupeAmount;
+$buttonNumber = stringToStringArray($var1,$var2);
+
+
+
+string $collection =`radioCollection -parent $sRow`;
+optionVar -stringValue "myCollection" $collection;
+radioButton -parent $sRow -collection $collection -data 0 -label "X-field";
+radioButton -parent $sRow -collection $collection -data 1 -label "Y-field";
+radioButton -parent $sRow -collection $collection -data 2 -label "Z-field";
+radioButton -parent $sRow -collection $collection -data 3 -label "All";
+button -p $sRow -l "Enter" -command buttonCmd;
+string $zRow = `rowColumnLayout    -numberOfRows 1 -cs 1 3
+                          -parent $mWindow`;
+button -l "Location Window" -p $zRow -command RandomGeneratorUI2;
+
+
+showWindow $mWindow;
+}
+
+RandomGeneratorUI();
+
+
+global proc buttonCmd()
+{
+    string $operations = `optionVar -q "myCollection"`;
+    string $oBttn = `radioCollection -q -select $operations`;
+    string $buttonData = `radioButton -q -data $oBttn`;
+
+    string $var1 = `optionVar -q "var1"`;
+    string $var2 = `optionVar -q "var2"`;
+    string $dupeAmount = `optionVar -q "Dupe"`;
+
+    float $varOne = `floatField -q -value $var1`;
+    float $varTwo = `floatField -q -value $var2`;
+    float $dupe = `floatField -q -value $dupeAmount`;
+    
+    if ($buttonData == 0)
+    {
+        randomX($varOne, $varTwo, $dupe);
+    }
+
+    else if ($buttonData == 1)
+    {
+        randomY($varOne, $varTwo, $dupe);
+    }
+
+    else if ($buttonData == 2)
+    {
+        randomZ($varOne, $varTwo, $dupe);
+    }
+     else if ($buttonData == 3)
+    {
+        randomZ($varOne, $varTwo, $dupe);
+        randomX($varOne, $varTwo, $dupe);
+        randomY($varOne, $varTwo, $dupe);
+    }
+    
+}
+
+global proc randomX(float $min, float $max, float $duplication)
+{
+    for ($index=0; $index<$duplication; $index++)
+    {
+    
+	string $list[] = `ls -tr -sl`;
+	int $size = size($list), $i;
+
+	if ($size > 0)
+    {
+		for($i = 0; $i < $duplication; $i++)
+            duplicate -rr;
+			setAttr ($list[$i] + ".tx") (rand($min,$max));
+    }
+    }
+}
+
+global proc randomY(float $min, float $max, float $duplication)
+{
+   
+  for ($index=0; $index<$duplication; $index++)
+    {
+    
+	string $list[] = `ls -tr -sl`;
+	int $size = size($list), $i;
+
+	if ($size > 0)
+    {
+		for($i = 0; $i < $duplication; $i++)
+            duplicate -rr;
+			setAttr ($list[$i] + ".ty") (rand($min,$max));
+    }
+    }
+    
+}
+
+global proc randomZ(float $min, float $max, float $duplication)
+{
+
+  for ($index=0; $index<$duplication; $index++)
+    {
+    
+	string $list[] = `ls -tr -sl`;
+	int $size = size($list), $i;
+
+	if ($size > 0)
+    {
+		for($i = 0; $i < $duplication; $i++)
+            duplicate -rr;
+			setAttr ($list[$i] + ".tz") (rand($min,$max));
+    }
+    }  
+
+}
+
+
+
+global proc RandomGeneratorUI2()
+{
+string $mWindow = "Generator_UI2";
+
+if (`window -exists $mWindow`)
+        deleteUI $mWindow;
+
+$mWindow = `window  -h 350 
+                    -w 350
+                    -title "Location Generator"
+                    -sizeable 1
+                    -resizeToFitChildren 1
+                    $mWindow`;
+string $mRow = `rowColumnLayout  -numberOfRows 4
+                                -parent $mWindow`; 
+
+string $mColumn = `rowColumnLayout    -numberOfRows 1 
+                          -parent $mRow`;
+string $sColumn = `rowColumnLayout    -numberOfRows 1
+                          -parent $mRow`;
+string $sRow = `rowColumnLayout    -numberOfRows 1 -cs 1 3
+                          -parent $mWindow`;
+string $buttonNumber[];
+
+string $var1 = `floatField -p $mColumn -w 85`;
+button -l "Min Range" -backgroundColor 0.8 0.8 0.8 -w 85
+-parent $sColumn;
+string $var2 = `floatField -p $mColumn -w 85`;
+button -l "Max Range" -backgroundColor 0.8 0.8 0.8 -w 85
+-parent $sColumn; 
+string $dupeAmount = `floatField -p $mColumn -w 85`;
+button -l "Repeat's" -backgroundColor 0.8 0.8 0.8 -w 85
+-parent $sColumn;
+
+optionVar -stringValue "var1" $var1;
+optionVar -stringValue "var2" $var2;
+optionVar -stringValue "Dupe" $dupeAmount;
+$buttonNumber = stringToStringArray($var1,$var2);
+
+
+
+string $collection =`radioCollection -parent $sRow`;
+optionVar -stringValue "myCollection" $collection;
+radioButton -parent $sRow -collection $collection -data 0 -label "X-field";
+radioButton -parent $sRow -collection $collection -data 1 -label "Y-field";
+radioButton -parent $sRow -collection $collection -data 2 -label "Z-field";
+radioButton -parent $sRow -collection $collection -data 3 -label "All";
+button -p $sRow -l "Enter" -command buttoncmd2;
+
+string $zRow = `rowColumnLayout    -numberOfRows 1 -cs 1 3
+                          -parent $mWindow`;
+button -l "Copy Window" -p $zRow -command RandomGeneratorUI;
+
+showWindow $mWindow;
+}
+
+
+
+global proc buttoncmd2()
+{
+    string $operations = `optionVar -q "myCollection"`;
+    string $oBttn = `radioCollection -q -select $operations`;
+    string $buttonData = `radioButton -q -data $oBttn`;
+
+    string $var1 = `optionVar -q "var1"`;
+    string $var2 = `optionVar -q "var2"`;
+    string $dupeAmount = `optionVar -q "Dupe"`;
+
+    float $varOne = `floatField -q -value $var1`;
+    float $varTwo = `floatField -q -value $var2`;
+    float $dupe = `floatField -q -value $dupeAmount`;
+    
+    if ($buttonData == 0)
+    {
+        randomXX($varOne, $varTwo, $dupe);
+    }
+
+    else if ($buttonData == 1)
+    {
+        randomYY($varOne, $varTwo, $dupe);
+    }
+
+    else if ($buttonData == 2)
+    {
+        randomZZ($varOne, $varTwo, $dupe);
+    }
+     else if ($buttonData == 3)
+    {
+        randomZZ($varOne, $varTwo, $dupe);
+        randomXX($varOne, $varTwo, $dupe);
+        randomYY($varOne, $varTwo, $dupe);
+    }
+   
+}
+
+global proc randomXX(float $min, float $max, float $duplication)
+{
+    for ($i=0; $i<$duplication; $i++)
+    {
+	string $list[] = `ls -tr -sl`;
+	int $size = size($list), $i;
+
+	if ($size > 0)
+    {
+		for($i = 0; $i < $size; $i++)
+			setAttr ($list[$i] + ".tx") (rand($min,$max));
+    }
+    }
+}
+
+global proc randomYY(float $min, float $max, float $duplication)
+{
+    for ($i=0; $i<$duplication; $i++)
+    {
+	string $list[] = `ls -tr -sl`;
+	int $size = size($list), $i;
+
+	if ($size > 0)
+    {
+		for($i = 0; $i < $size; $i++)
+			setAttr ($list[$i] + ".ty") (rand($min,$max));
+    }
+    }
+}
+
+global proc randomZZ(float $min, float $max, float $duplication)
+{
+    for ($i=0; $i<$duplication; $i++)
+    {
+	string $list[] = `ls -tr -sl`;
+	int $size = size($list), $i;
+
+	if ($size > 0)
+    {
+		for($i = 0; $i < $size; $i++)
+			setAttr ($list[$i] + ".tz") (rand($min,$max));
+    }
+    }
+}
+
+global proc genStartUpReset()
+{
+    if (`window -exists "Generator_UI2"`)
+    {
+        deleteUI "Generator_UI2";
+    }
+
+}genStartUpReset();
+
+//Random procs used from a friendly Mod on simplyMaya really helped me get the procceses don way faster so i could focus on buttons
+/* Define a global procedure called randomTY which takes nothing as input
+global proc randomTY()
+{
+	// Define a string array variable $list[] and store a list of selected transform nodes in it
+	string $list[] = `ls -tr -sl`;
+	// Define an integer variable $size and store the size of the $list[] array in it.
+	// Also we define another integer variable $i for later use.
+	int $size = size($list), $i;
+
+	// If there is something in the $list[] then go on. Otherwise just quit
+	if ($size > 0)
+		// Iterate though the list ($i goes from 0 to $size - 1)
+		for($i = 0; $i < $size; $i++)
+			// Set the .translateY (aka .ty) attribute of each object in the list to a random value of 1-9
+			// Note the extra parenthesis'. They are needed so the clauses inside gets executed first before the setAttr command.
+			setAttr ($list[$i] + ".ty") (rand(1,9));
+	// End of story
+}*/

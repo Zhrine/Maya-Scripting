@@ -1,0 +1,17 @@
+
+global proc ClusterSelect()
+{
+    string $sels[] =`ls - sl`;
+
+    string $clusterArray[] = `cluster $sels`;
+
+    string $cluster = $clusterArray[1];
+
+    float $pos[] = `xform -q -ws -rotatePivot $cluster`;
+
+    string $loc[] = `spaceLocator`;
+    xform -worldSpace -translation $pos[0] $pos[1] $pos[2] $loc;
+    delete $cluster;
+
+}
+ClusterSelect();

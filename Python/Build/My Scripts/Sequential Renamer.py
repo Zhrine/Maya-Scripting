@@ -12,5 +12,5 @@ print(x)
 txt = "leg_###_jnt_####"
 
 count = txt.count("#")
-if > 0:
+if x > 0:
     x = txt.find("#" * count)
